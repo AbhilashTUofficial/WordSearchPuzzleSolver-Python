@@ -21,7 +21,7 @@ class PuzzleSolver:
 
     def checkWordHori(self, answers, x, cmb):
         # Clear all text from log file.
-        open('CMD-Version/logs.txt', 'w').write("")
+        open('CLI/logs.txt', 'w').write("")
         # ? loop through all words in answers<list>
         for word in answers:
             # ? if the word is not in the layer
@@ -49,12 +49,12 @@ class PuzzleSolver:
                 answers.remove(word)
 
             except Exception as e:
-                log = open('CMD-Version/logs.txt', 'a')
+                log = open('CLI/logs.txt', 'a')
                 log.write(f"{e}\n{word} is not in {cmb}")
 
     def checkWordVert(self, answers, y, cmp):
         # Clear all text from log file.
-        open('CMD-Version/logs.txt', 'w').write("")
+        open('CLI/logs.txt', 'w').write("")
         # ? loop through all words in answers<list>
         for word in answers:
             # ? if the word is not in the layer
@@ -80,11 +80,11 @@ class PuzzleSolver:
                 answers.remove(word)
 
             except Exception as e:
-                log = open('CMD-Version/logs.txt', 'a')
+                log = open('CLI/logs.txt', 'a')
                 log.write(f"{e}\n{word} is not in {cmp}")
 
     def checkWordDiag(self, answers, y, cmp):
-        open('CMD-Version/logs.txt', 'w').write("")
+        open('CLI/logs.txt', 'w').write("")
         for word in answers:
             try:
 
@@ -97,7 +97,7 @@ class PuzzleSolver:
                 answers.remove(word)
 
             except Exception as e:
-                log = open('CMD-Version/logs.txt', 'a')
+                log = open('CLI/logs.txt', 'a')
                 log.write(f"{e}\n{word} is not in {cmp}")
 
 
@@ -153,9 +153,10 @@ class PuzzleSolver:
         # ? Starting Points : sps
         sps = [(_, 0)for _ in range(len(puzzle))]+[(0, _)
                                                    for _ in range(1, len(puzzle[0]))]
+        print(sps)
 
-        # print(sps)
         for i, (_x, _y) in enumerate(sps):
+            diagLenths=[]
             cmb = ''.join([puzzle[_x+j][_y+j]
                            for j in [_ for _ in range(dMax-(_x+_y))]])
 
@@ -195,7 +196,7 @@ class PuzzleSolver:
                     answers.remove(word)
 
                 except Exception as e:
-                    log = open('CMD-Version/logs.txt', 'a')
+                    log = open('CLI/logs.txt', 'a')
                     log.write(f"{e}\n{word} is not in {cmb}")
 
         # print(answerCoor)
