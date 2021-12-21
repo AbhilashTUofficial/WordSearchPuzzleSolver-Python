@@ -1,5 +1,7 @@
 from math import comb
 
+import numpy as np
+
 
 # * answerCoor<list> will store all coordinates of right answer charecters
 # * in a tuble : (x,y)
@@ -153,12 +155,23 @@ class PuzzleSolver:
         # ? Starting Points : sps
         sps = [(_, 0)for _ in range(len(puzzle))]+[(0, _)
                                                    for _ in range(1, len(puzzle[0]))]
-        print(sps)
+        # print(sps)
+
+
+
+        x,y = len(puzzle),len(puzzle[0])
+        np_puzzle = np.array(puzzle)
+        diags = [np_puzzle[::-1,:].diagonal(i) for i in range(-np_puzzle.shape[0]+1,np_puzzle.shape[1])]
+        diags.extend(np_puzzle.diagonal(i) for i in range(np_puzzle.shape[1]-1,-np_puzzle.shape[0],-1))
+
 
         for i, (_x, _y) in enumerate(sps):
             diagLenths=[]
-            cmb = ''.join([puzzle[_x+j][_y+j]
-                           for j in [_ for _ in range(dMax-(_x+_y))]])
+            # cmb = ''.join([puzzle[_x+j][_y+j]
+            #                for j in [_ for _ in range(dMax-(_x+_y))]])
+            cmb=''.join([_ for _ in diags][i])
+            print(cmb)
+            
 
             for word in answers:
                 try:
@@ -199,7 +212,7 @@ class PuzzleSolver:
                     log = open('CLI/logs.txt', 'a')
                     log.write(f"{e}\n{word} is not in {cmb}")
 
-        # print(answerCoor)
+        print(answerCoor)
 
 
 
